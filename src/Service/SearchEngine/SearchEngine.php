@@ -27,9 +27,7 @@ readonly class SearchEngine
             $results = $filterableItems;
         }
 
-        $results = (new CollectionFilterTypeResolver($results, $collectionTypeFilters))->filter();
-
-        return $results;
+        return (new CollectionFilterTypeResolver($results, $collectionTypeFilters))->filter();
     }
 
     private function separateFilterTypes(array $filters): array
