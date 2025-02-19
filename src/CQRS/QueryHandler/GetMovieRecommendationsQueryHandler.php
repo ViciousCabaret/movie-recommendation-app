@@ -18,9 +18,7 @@ readonly class GetMovieRecommendationsQueryHandler
 
     public function __invoke(GetMovieRecommendationsQuery $query): array
     {
-        /** @var RecommendationInterface $recommendationAlgorithm */
-        $recommendationAlgorithmClass = $query->getAlgorithmEnum()->getRecommendationAlgorithm();
-        $recommendationAlgorithm = new $recommendationAlgorithmClass();
+        $recommendationAlgorithm = $query->getAlgorithmEnum()->getRecommendationAlgorithm();
 
         $searchEngine = new SearchEngine($this->moviesProvider);
 

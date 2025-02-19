@@ -3,6 +3,7 @@
 namespace App\Enum;
 
 use App\Service\SearchEngine\Recommendation\EvenLettersInTitleAndStartsWithLetterWRecommendation;
+use App\Service\SearchEngine\Recommendation\Interface\RecommendationInterface;
 use App\Service\SearchEngine\Recommendation\MultiWordTitleRecommendation;
 use App\Service\SearchEngine\Recommendation\ThreeRandomMoviesRecommendation;
 
@@ -12,13 +13,13 @@ enum RecommendationAlgorithmEnum: string
     case MULTI_WORD_RECOMMENDATION = 'multi_word_recommendation';
     case EVEN_LETTERS_WITH_LETTER_W_IN_TITLE_RECOMMENDATION = 'even_letters_with_letter_w_in_title_recommendation';
 
-    public function getRecommendationAlgorithm(): string
+    public function getRecommendationAlgorithm(): RecommendationInterface
     {
         return match ($this) {
-            self::THREE_RANDOM_MOVIES_RECOMMENDATION => ThreeRandomMoviesRecommendation::class,
-            self::MULTI_WORD_RECOMMENDATION => MultiWordTitleRecommendation::class,
+            self::THREE_RANDOM_MOVIES_RECOMMENDATION => new ThreeRandomMoviesRecommendation(),
+            self::MULTI_WORD_RECOMMENDATION => new MultiWordTitleRecommendation(),
             self::EVEN_LETTERS_WITH_LETTER_W_IN_TITLE_RECOMMENDATION
-            => EvenLettersInTitleAndStartsWithLetterWRecommendation::class,
+            => new EvenLettersInTitleAndStartsWithLetterWRecommendation(),
         };
     }
 }
